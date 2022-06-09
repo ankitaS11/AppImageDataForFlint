@@ -1,5 +1,13 @@
 # AppImageDataForFlint
 
+## Using the AppImage
+
+The README is for those who want to build the AppImage again, but for those who just want to use it, the instructions are:
+ 
+1. Download the AppImage: `wget https://github.com/ankitaS11/AppImageDataForFlint/raw/main/FLINT-2c65c58-x86_64.AppImage`
+2. Make it executable: `chmod +x FLINT-2c65c58-x86_64.AppImage`
+3. Run it: `./FLINT-2c65c58-x86_64.AppImage`
+
 ## Install required dependencies
 
 ```bash
