@@ -57,7 +57,7 @@ git clone git@github.com:ankitaS11/FLINT.git && git checkout fix_poco_include &&
 mkdir build && cd build
 cmake .. && make -j$nproc && make install DESTDIR=AppDir
 
-cd $WORKDIR
+cd $WORKDIR/FLINT/Source/build/
 # Install linuxdeploy
 wget https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage
 
@@ -67,10 +67,13 @@ chmod +x linuxdeploy-x86_64.AppImage
 # This command will fail first (and it's expected)
 ./linuxdeploy-x86_64.AppImage --appdir AppDir || true
 
-cd $WORKDIR
+cd $WORKDIR/FLINT/Source/build
 # Copy the files from the GitHub repository:
 git clone git@github.com:ankitaS11/AppImageDataForFlint.git && cd AppImageDataForFlint
 
 cp icon.png ~/Downloads/FLINT/Source/build/AppDir/
 cp usr/share/applications/AppDir.desktop ~/Downloads/FLINT/Source/build/AppDir/usr/share/applications/
 cp ~/Downloads/FLINT/Source/build/bin/* AppDir/usr/bin/
+
+# This will build a FLINT-x86_64.appimage file, the `x86_64` may vary depending on the system you are on.
+./linuxdeploy-x86_64.AppImage --appdir AppDir --output appimage -i AppDir/icon.png
