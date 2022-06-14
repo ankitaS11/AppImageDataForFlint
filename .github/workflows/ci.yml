@@ -37,7 +37,8 @@ jobs:
         run: |
           chmod +x AppImage_FLINT_Build.sh
           ./AppImage_FLINT_Build.sh
-          curl bashupload.com -T FLINT-f6125df-x86_64.AppImage
+          apt install tree
+          tree
           pwd
           
 #       - name: Save artifacts
