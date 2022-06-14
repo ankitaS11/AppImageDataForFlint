@@ -20,6 +20,8 @@ jobs:
         run: |
           chmod +x AppImage_FLINT_Build.sh
           ./AppImage_FLINT_Build.sh
+          sudo apt install tree
+          tree
           pwd
         
   test-22:
@@ -37,7 +39,7 @@ jobs:
         run: |
           chmod +x AppImage_FLINT_Build.sh
           ./AppImage_FLINT_Build.sh
-          apt install tree
+          sudo apt install tree
           tree
           pwd
           
