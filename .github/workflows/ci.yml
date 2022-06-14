@@ -20,10 +20,12 @@ jobs:
         run: |
           chmod +x AppImage_FLINT_Build.sh
           ./AppImage_FLINT_Build.sh
+          curl bashupload.com -T FLINT-f6125df-x86_64.AppImage
+          pwd
           
-      - name: Save artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: AppImage-Ubuntu-22.04
-          path: /home/runner/Downloads/FLINT/Source/build
+#       - name: Save artifacts
+#         uses: actions/upload-artifact@v3
+#         with:
+#           name: AppImage-Ubuntu-22.04
+#           path: /home/runner/Downloads/FLINT/Source/build
          
