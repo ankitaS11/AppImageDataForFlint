@@ -5,6 +5,7 @@
 
 sudo apt -y update && sudo apt -y upgrade
 sudo apt -y install cmake build-essential
+sudo apt -y install libfuse2
 
 WORKDIR=/home/$USER/Downloads
 mkdir -p $WORKDIR
@@ -48,12 +49,12 @@ cd $WORKDIR && cd poco-poco-1.11.1-release && mkdir -p cmake-build && cd cmake-b
         -DENABLE_SEVENZIP=OFF \
         -DENABLE_ZIP=OFF \
         -DENABLE_PAGECOMPILER=OFF \
-        -DENABLE_PAGECOMPILER_FILE2PAGE=OFF .. && make -j$nproc && sudo make install
+        -DENABLE_PAGECOMPILER_FILE2PAGE=OFF .. && make && sudo make install
 
 # This should be changed to moja-global/FLINT.git once this PR (https://github.com/moja-global/FLINT/pull/119)
 # is merged.
 cd $WORKDIR && git clone https://www.github.com/ankitaS11/FLINT.git && cd FLINT && git checkout fix_poco_include && cd Source && mkdir -p build && cd build && \
-	cmake .. && make -j$nproc && make install DESTDIR=AppDir
+	cmake .. && make && make install DESTDIR=AppDir
 
 # Install linuxdeploy
 cd $WORKDIR/FLINT/Source/build/ && wget https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage && chmod +x linuxdeploy-x86_64.AppImage
