@@ -17,7 +17,7 @@ cd $WORKDIR && git clone https://www.github.com/mat007/turtle.git && cd turtle &
 
 # Install unixODBC
 cd $WORKDIR && wget http://www.unixodbc.org/unixODBC-2.3.11.tar.gz && gunzip unixODBC-2.3.11.tar.gz && tar xvf unixODBC*.tar
-cd $WORKDIR && cd unixODBC-2.3.11 && ./configure && make -j$nproc && sudo make install
+cd $WORKDIR && cd unixODBC-2.3.11 && ./configure && make && sudo make install
 
 # Install sqlite3
 sudo apt -y install libsqlite3-dev
