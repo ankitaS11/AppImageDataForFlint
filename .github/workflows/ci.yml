@@ -47,5 +47,5 @@ jobs:
 #         uses: actions/upload-artifact@v3
 #         with:
 #           name: AppImage-Ubuntu-22.04
-#           path: /home/runner/Downloads/FLINT/Source/build
+#           path: /home/runner/work/AppImageDataForFlint
         
