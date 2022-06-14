@@ -13,7 +13,7 @@ mkdir -p $WORKDIR
 sudo apt-get -y install libboost-all-dev
 
 # Build Turtle from source
-cd $WORKDIR && git clone https://www.github.com/mat007/turtle.git && cd turtle && mkdir -p build && cd build && cmake .. && make -j$nproc && sudo make install
+cd $WORKDIR && git clone https://www.github.com/mat007/turtle.git && cd turtle && mkdir -p build && cd build && cmake .. && make && sudo make install
 
 # Install unixODBC
 cd $WORKDIR && wget http://www.unixodbc.org/unixODBC-2.3.11.tar.gz && gunzip unixODBC-2.3.11.tar.gz && tar xvf unixODBC*.tar
