@@ -15,4 +15,5 @@ jobs:
         
       - name: Run Script
         run: |
-          bash AppImage_FLINT_Build.sh
+          chmod +x AppImage_FLINT_Build.sh
+          ./AppImage_FLINT_Build.sh
