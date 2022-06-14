@@ -23,6 +23,12 @@ jobs:
           sudo apt install tree
           tree
           pwd
+          
+      - name: Save artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: AppImage-Ubuntu-20.04
+          path: /home/runner/work/AppImageDataForFlint/AppImageDataForFlint
         
   test-22:
     name: Test FLINT 22.04 build script
@@ -43,9 +49,9 @@ jobs:
           tree
           pwd
           
-#       - name: Save artifacts
-#         uses: actions/upload-artifact@v3
-#         with:
-#           name: AppImage-Ubuntu-22.04
-#           path: /home/runner/work/AppImageDataForFlint
+      - name: Save artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: AppImage-Ubuntu-22.04
+          path: /home/runner/work/AppImageDataForFlint/AppImageDataForFlint
         
