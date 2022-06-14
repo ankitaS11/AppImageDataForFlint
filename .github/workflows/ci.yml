@@ -5,6 +5,29 @@ on:
     branches: [ testing ]
 
 jobs:
+
+  test-18:
+    name: Test FLINT 18.04 build script
+    runs-on: ubuntu-18.04
+    
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+        
+      - name: Collect Workflow Telemetry
+        uses: thundra-io/workflow-telemetry-action@v1
+        
+      - name: Run Script
+        run: |
+          chmod +x AppImage_FLINT_Build.sh
+          ./AppImage_FLINT_Build.sh
+          
+      - name: Save artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: AppImage-Ubuntu-18.04
+          path: /home/runner/work/AppImageDataForFlint/AppImageDataForFlint
+
   test-20:
     name: Test 20.04 FLINT build script
     runs-on: ubuntu-20.04
@@ -20,9 +43,6 @@ jobs:
         run: |
           chmod +x AppImage_FLINT_Build.sh
           ./AppImage_FLINT_Build.sh
-          sudo apt install tree
-          tree
-          pwd
           
       - name: Save artifacts
         uses: actions/upload-artifact@v3
@@ -45,9 +65,6 @@ jobs:
         run: |
           chmod +x AppImage_FLINT_Build.sh
           ./AppImage_FLINT_Build.sh
-          sudo apt install tree
-          tree
-          pwd
           
       - name: Save artifacts
         uses: actions/upload-artifact@v3
