@@ -5,8 +5,25 @@ on:
     branches: [ testing ]
 
 jobs:
-  test:
-    name: Test FLINT build script
+  test-20:
+    name: Test 20.04 FLINT build script
+    runs-on: ubuntu-20.04
+    
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+        
+      - name: Collect Workflow Telemetry
+        uses: thundra-io/workflow-telemetry-action@v1
+        
+      - name: Run Script
+        run: |
+          chmod +x AppImage_FLINT_Build.sh
+          ./AppImage_FLINT_Build.sh
+          pwd
+        
+  test-22:
+    name: Test FLINT 22.04 build script
     runs-on: ubuntu-22.04
     
     steps:
@@ -28,4 +45,4 @@ jobs:
 #         with:
 #           name: AppImage-Ubuntu-22.04
 #           path: /home/runner/Downloads/FLINT/Source/build
-         
+        
