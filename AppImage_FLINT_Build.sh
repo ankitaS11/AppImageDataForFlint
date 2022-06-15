@@ -44,7 +44,7 @@ sudo apt -y install libsqlite3-dev
 sudo apt -y libpcre3-dev
 
 # Install POCO
-cd $WORKDIR && wget https://github.com/pocoproject/poco/archive/refs/tags/poco-1.11.1-release.tar.gz && tar xvf poco-*.tar.gz
+cd $WORKDIR && wget https://github.com/pocoproject/poco/archive/refs/tags/poco-1.11.1-release.tar.gz --no-check-certificate && tar xvf poco-*.tar.gz
 
 cd $WORKDIR && cd poco-poco-1.11.1-release && mkdir -p cmake-build && cd cmake-build && \
 	cmake -DCMAKE_BUILD_TYPE=RELEASE -DPOCO_UNBUNDLED=ON \
