@@ -4,11 +4,30 @@
 # The AppImage built using this script has been, so far, tested on Ubuntu 22.04 derivatives.
 
 sudo apt -y update && sudo apt -y upgrade
-sudo apt -y install cmake build-essential
+sudo apt -y install build-essential
 sudo apt -y install libfuse2
 
 WORKDIR=/home/$USER/Downloads
 mkdir -p $WORKDIR
+
+# Remove existing versions of CMake (if any)
+sudo apt purge cmake
+
+# CMake needs OpenSSL (1.1.1o is the preferred versionas of June 2022)
+wget https://www.openssl.org/source/openssl-1.1.1o.tar.gz && \
+	tar -xvf openssl-1.1.1o.tar.gz && \
+	cd openssl-1.1.1o && \
+	./config && \
+	make && \
+	sudo make install
+
+# Install latest CMake version - sudo apt install cmake is outdated!!
+wget https://github.com/Kitware/CMake/releases/download/v3.24.0-rc1/cmake-3.24.0-rc1.tar.gz && \
+	tar -xvf cmake-3.24.0-rc1.tar.gz && \
+	cd cmake-3.24.0-rc1 && ./bootstrap && make && sudo make install
+
+# Install SQLite3
+sudo apt-get -y install libsqlite3-dev libsqlite3-0 sqlite3
 
 # Install Boost
 sudo apt-get -y install libboost-all-dev
