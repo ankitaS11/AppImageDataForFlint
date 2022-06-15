@@ -76,7 +76,9 @@ cd $WORKDIR && git clone https://www.github.com/ankitaS11/FLINT.git && cd FLINT 
 	cmake .. && make && make install DESTDIR=AppDir
 
 # Install linuxdeploy
-cd $WORKDIR/FLINT/Source/build/ && wget https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage && chmod +x linuxdeploy-x86_64.AppImage
+cd $WORKDIR/FLINT/Source/build/ && \
+	wget https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage --no-check-certificate && \
+	chmod +x linuxdeploy-x86_64.AppImage
 
 # Make sure you are in the build folder of the FLINT/Source/
 # This command will fail first (and it's expected)
