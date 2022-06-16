@@ -13,14 +13,15 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
-        
-      - name: Collect Workflow Telemetry
-        uses: thundra-io/workflow-telemetry-action@v1
+      
         
       - name: Run Script
         run: |
           chmod +x AppImage_FLINT_Build.sh
           ./AppImage_FLINT_Build.sh
+          sudo apt install tree
+          tree
+          pwd
           
       - name: Save artifacts
         uses: actions/upload-artifact@v3
@@ -36,13 +37,14 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v3
         
-      - name: Collect Workflow Telemetry
-        uses: thundra-io/workflow-telemetry-action@v1
         
       - name: Run Script
         run: |
           chmod +x AppImage_FLINT_Build.sh
           ./AppImage_FLINT_Build.sh
+          sudo apt install tree
+          tree
+          pwd
           
       - name: Save artifacts
         uses: actions/upload-artifact@v3
@@ -58,13 +60,14 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v3
         
-      - name: Collect Workflow Telemetry
-        uses: thundra-io/workflow-telemetry-action@v1
         
       - name: Run Script
         run: |
           chmod +x AppImage_FLINT_Build.sh
           ./AppImage_FLINT_Build.sh
+          sudo apt install tree
+          tree
+          pwd
           
       - name: Save artifacts
         uses: actions/upload-artifact@v3
