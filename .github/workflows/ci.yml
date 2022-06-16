@@ -27,7 +27,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: AppImage-Ubuntu-18.04
-          path: /home/runner/work/AppImageDataForFlint/AppImageDataForFlint
+          path: /home/runner/work/AppImageDataForFlint/AppImageDataForFlint/FLINT-2c65c58-x86_64.AppImage
 
   test-20:
     name: Test 20.04 FLINT build script
@@ -50,7 +50,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: AppImage-Ubuntu-20.04
-          path: /home/runner/work/AppImageDataForFlint/AppImageDataForFlint
+          path: /home/runner/work/AppImageDataForFlint/AppImageDataForFlint/FLINT-2c65c58-x86_64.AppImage
         
   test-22:
     name: Test FLINT 22.04 build script
@@ -73,5 +73,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: AppImage-Ubuntu-22.04
-          path: /home/runner/work/AppImageDataForFlint/AppImageDataForFlint
-        
+          path: /home/runner/work/AppImageDataForFlint/AppImageDataForFlint/FLINT-2c65c58-x86_64.AppImage
