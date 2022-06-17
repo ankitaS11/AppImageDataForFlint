@@ -1,0 +1,102 @@
+name: Test Script
+
+on:
+  push:
+    branches: [ testing ]
+
+jobs:
+  appimage:
+    name: Build FLINT for 22.04
+    runs-on: ubuntu-22.04
+    
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+        
+      - name: Install packages
+        run: |
+          sudo apt -y update && sudo apt -y upgrade
+          sudo apt -y install build-essential
+          sudo apt -y install libfuse2
+          
+      - name: Setup work directory
+        run: |
+          WORKDIR=/home/$USER/Downloads
+          mkdir -p $WORKDIR
+      
+      - name: Setup CMake
+        run: |
+          sudo apt purge cmake
+          wget https://www.openssl.org/source/openssl-1.1.1o.tar.gz && \
+	          tar -xvf openssl-1.1.1o.tar.gz && \
+	          cd openssl-1.1.1o && \
+	          ./config && \
+	          make && \
+	          sudo make install
+          
+          wget https://github.com/Kitware/CMake/releases/download/v3.24.0-rc1/cmake-3.24.0-rc1.tar.gz && \
+	          tar -xvf cmake-3.24.0-rc1.tar.gz && \
+	          cd cmake-3.24.0-rc1 && ./bootstrap && make && sudo make install
+            
+      - name: Install essential libraries
+        run: |
+          sudo apt-get -y install libsqlite3-dev libsqlite3-0 sqlite3
+          sudo apt-get -y install libboost-all-dev
+          cd $WORKDIR && git clone https://www.github.com/mat007/turtle.git && cd turtle && mkdir -p build && cd build && cmake .. && make && sudo make install
+          cd $WORKDIR && wget http://www.unixodbc.org/unixODBC-2.3.11.tar.gz && gunzip unixODBC-2.3.11.tar.gz && tar xvf unixODBC*.tar
+          cd $WORKDIR && cd unixODBC-2.3.11 && ./configure && make && sudo make install
+          
+          sudo apt -y install libsqlite3-dev
+          sudo apt -y libpcre3-dev
+          
+     - name: Install POCO
+       run: |
+        cd $WORKDIR && wget https://github.com/pocoproject/poco/archive/refs/tags/poco-1.11.1-release.tar.gz && tar xvf poco-*.tar.gz
+        cd $WORKDIR && cd poco-poco-1.11.1-release && mkdir -p cmake-build && cd cmake-build && \
+	      cmake -DCMAKE_BUILD_TYPE=RELEASE -DPOCO_UNBUNDLED=ON \
+          -DENABLE_JSON=ON \
+          -DENABLE_DATA=ON \
+          -DENABLE_DATA_ODBC=ON \
+          -DENABLE_DATA_SQLITE=ON \
+          -DENABLE_DATA_MYSQL=OFF \
+          -DENABLE_ACTIVERECORD=OFF \
+          -DENABLE_ACTIVERECORD_COMPILER=OFF \
+          -DENABLE_ENCODINGS=OFF \
+          -DENABLE_ENCODINGS_COMPILER=OFF \
+          -DENABLE_XML=OFF \
+          -DENABLE_MONGODB=OFF \
+          -DENABLE_REDIS=OFF \
+          -DENABLE_PDF=OFF \
+          -DENABLE_UTIL=OFF \
+          -DENABLE_NET=OFF \
+          -DENABLE_NETSSL=OFF \
+          -DENABLE_CRYPTO=OFF \
+          -DENABLE_SEVENZIP=OFF \
+          -DENABLE_ZIP=OFF \
+          -DENABLE_PAGECOMPILER=OFF \
+          -DENABLE_PAGECOMPILER_FILE2PAGE=OFF .. && make && sudo make install
+          
+      - name: Install FLINT
+        run: |
+          cd $WORKDIR && git clone https://www.github.com/ankitaS11/FLINT.git && cd FLINT && git checkout fix_poco_include && cd Source && mkdir -p build && cd build && \
+	        cmake .. && make && make install DESTDIR=AppDir
+          
+      - name: Install Linux Deploy
+        run: |
+          cd $WORKDIR/FLINT/Source/build/ && wget https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage && chmod +x linuxdeploy-x86_64.AppImage
+      
+      - name: Build the distribution
+        run: |
+          cd $WORKDIR/FLINT/Source/build/ && ./linuxdeploy-x86_64.AppImage --appdir AppDir || true
+          cd $WORKDIR/FLINT/Source/build && git clone https://www.github.com/ankitaS11/AppImageDataForFlint.git && cd AppImageDataForFlint && \
+	          cp icon.png $WORKDIR/FLINT/Source/build/AppDir && \
+	          cp usr/share/applications/AppDir.desktop $WORKDIR/FLINT/Source/build/AppDir/usr/share/applications/ && \
+	          cd $WORKDIR/FLINT/Source/build && \
+	          cp bin/* AppDir/usr/bin/ && \
+	          ./linuxdeploy-x86_64.AppImage --appdir AppDir --output appimage -i AppDir/icon.png
+            
+       - name: Save artifacts
+         uses: actions/upload-artifact@v3
+         with:
+             name: AppImage-Ubuntu-22.04-GHA
+             path: /home/runner/work/AppImageDataForFlint/AppImageDataForFlint/FLINT-2c65c58-x86_64.AppImage
