@@ -1,0 +1,76 @@
+name: Test Script
+
+on:
+  push:
+    branches: [ testing ]
+
+jobs:
+
+  test-18:
+    name: Test FLINT 18.04 build script
+    runs-on: ubuntu-18.04
+    
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+      
+        
+      - name: Run Script
+        run: |
+          chmod +x AppImage_FLINT_Build.sh
+          ./AppImage_FLINT_Build.sh
+          sudo apt install tree
+          tree
+          pwd
+          
+      - name: Save artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: AppImage-Ubuntu-18.04
+          path: /home/runner/work/AppImageDataForFlint/AppImageDataForFlint/FLINT-2c65c58-x86_64.AppImage
+
+  test-20:
+    name: Test 20.04 FLINT build script
+    runs-on: ubuntu-20.04
+    
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+        
+        
+      - name: Run Script
+        run: |
+          chmod +x AppImage_FLINT_Build.sh
+          ./AppImage_FLINT_Build.sh
+          sudo apt install tree
+          tree
+          pwd
+          
+      - name: Save artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: AppImage-Ubuntu-20.04
+          path: /home/runner/work/AppImageDataForFlint/AppImageDataForFlint/FLINT-2c65c58-x86_64.AppImage
+        
+  test-22:
+    name: Test FLINT 22.04 build script
+    runs-on: ubuntu-22.04
+    
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+        
+        
+      - name: Run Script
+        run: |
+          chmod +x AppImage_FLINT_Build.sh
+          ./AppImage_FLINT_Build.sh
+          sudo apt install tree
+          tree
+          pwd
+          
+      - name: Save artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: AppImage-Ubuntu-22.04
+          path: /home/runner/work/AppImageDataForFlint/AppImageDataForFlint/FLINT-2c65c58-x86_64.AppImage
