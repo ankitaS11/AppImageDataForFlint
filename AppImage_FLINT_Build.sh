@@ -41,7 +41,7 @@ cd $WORKDIR && cd unixODBC-2.3.11 && ./configure && make && sudo make install
 
 # Install sqlite3
 sudo apt -y install libsqlite3-dev
-sudo apt -y libpcre3-dev
+sudo apt -y install libpcre3-dev
 
 # Install POCO
 cd $WORKDIR && wget https://github.com/pocoproject/poco/archive/refs/tags/poco-1.11.1-release.tar.gz && tar xvf poco-*.tar.gz
